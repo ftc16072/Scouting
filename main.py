@@ -1,4 +1,5 @@
 import datetime
+import logging
 import os
 import base64
 from io import BytesIO
@@ -39,14 +40,17 @@ class Scouting(object):
         return sqlite3.connect(DB_STRING, detect_types=sqlite3.PARSE_DECLTYPES)
 
     def template(self, template_name, **kwargs):
+        kwargs['user'] = self.getUser()
         return self.lookup.get_template(template_name).render(**kwargs)
 
       
     def getUser(self):
         username = Cookie('username').get()
         team = Cookie('team').get()
+        print(username, team)
         if not username or not team:
             return None
+        return users.User(username, team)
 
     def show_loginpage(self, error=''):
         """Clear session and show login page"""
@@ -54,7 +58,17 @@ class Scouting(object):
         return self.template("login.mako", error=error)
 
     def show_mainpage(self, user, error=''):
-        return self.template('index.mako')
+        return self.template('index.mako', user=user)
+
+    def createAccount(self, username, team, password):
+        error = users.Users().createUser(username, team, password)
+        if(not error):
+            self.login(username, password)
+        else:
+            self.showSignup(error=error)
+    
+
+
 
 
     @cherrypy.expose
@@ -62,20 +76,29 @@ class Scouting(object):
         user = users.Users().getUser(username, password)
         if user:
             Cookie('username').set(user.username)
-            Cookie('team').set(user.team.teamName)
+            Cookie('team').set(user.team.teamNum)
             return self.show_mainpage(user)
         return self.show_loginpage('Not a valid username/password pair')
 
     @cherrypy.expose
     def logout(self):
         return self.show_loginpage()
-    @cherrypy.expose
-    def index(self):
-        return self.template('index.mako')
 
     @cherrypy.expose
-    def scoutingSheet(self):
-        return self.template('scoutingsheet.mako')
+    def index(self):
+        """Shows main page or forces login if not logged in"""
+        user = self.getUser()
+        if not user:
+            return self.show_loginpage('')
+        return self.show_mainpage(user)
+
+    @cherrypy.expose
+    def showSignup(self, error=''):
+        return self.template('signup.mako', error=error)
+    
+    @cherrypy.expose
+    def signup(self, username, team, password):
+        self.createAccount(username, team, password)
 
 
 

@@ -7,9 +7,9 @@ import team
 
 
 class User(object):
-    def __init__(self, username, teamName):
+    def __init__(self, username, teamNum):
         self.username = username
-        self.team = team.teams.getTeam(teamName)
+        self.team = team.teams.getTeam(teamNum)
 
 
 class Users(object):

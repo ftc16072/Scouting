@@ -17,8 +17,11 @@
    <link rel="stylesheet" href="static/style.css">
   
 </head>
-<p style="text-align:right"><A HREF="/logout">Logout</A></p>
-
+%if user == None:
+    <p style="text-align:right"><A HREF="/showSignup" class="uk-button uk-button-default" style="border-radius:10px;">Sign Up </A> -- <a href="/logout" class="uk-button uk-button-default" style="border-radius:10px;"> login</A></p>
+%else:
+    <p style="text-align:right"><A HREF="/logout" class="uk-button uk-button-default" style="border-radius:10px;">Logout</A></p>
+%endif
     ${self.body()}
 
 </body>
