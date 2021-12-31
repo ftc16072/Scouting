@@ -43,7 +43,7 @@ class Scouting(object):
 
     @cherrypy.expose
     def index(self):
-        return "Hello World!"
+        return self.template('index.mako')
 
 
 
