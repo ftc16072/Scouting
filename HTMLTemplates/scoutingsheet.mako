@@ -5,7 +5,7 @@
 <u>
     <h1 style="text-align:center;">Scouting Sheet </h1>
 </u>
-<br>
+<br/>
 
 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Team Number
@@ -16,7 +16,14 @@
     <li><a class="dropdown-item" href="#">19376</a></li>
     <li><a class="dropdown-item" href="#">254</a></li>
 </ul>
+<br/>
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    alliance
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Blue Alliance</a></li>
+    <li><a class="dropdown-item" href="#">Red Alliance</a></li>
+</ul>    
 
-
-<br>
+<br/>
 <h2 style='text-align:center;'>Autonomous</h2>
