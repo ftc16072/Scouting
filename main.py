@@ -73,6 +73,10 @@ class Scouting(object):
     def index(self):
         return self.template('index.mako')
 
+    @cherrypy.expose
+    def scoutingSheet(self):
+        return self.template('scoutingsheet.mako')
+
 
 
 if __name__ == "__main__":
