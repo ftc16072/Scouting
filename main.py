@@ -11,7 +11,6 @@ from mako.lookup import TemplateLookup
 
 DB_STRING = os.path.join(os.path.dirname(__file__), 'data/database.sqlite3')
 
-""" 
 class Cookie(object):
     #Abstracts cookies so they can be in sessions
     def __init__(self, name):
@@ -28,8 +27,7 @@ class Cookie(object):
     def set(self, value):
         #Set the value of the cookie
         cherrypy.session[self.name] = value
- """
-
+        
 class Scouting(object):
     
     def __init__(self):
